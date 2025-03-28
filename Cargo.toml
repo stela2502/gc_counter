@@ -1,0 +1,12 @@
+[package]
+name = "gc_counter"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+bigtools = "0.5.4"
+flate2 = "*"
+indicatif = {version = "*", features = ["rayon"]}
+needletail = "0.5.1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }

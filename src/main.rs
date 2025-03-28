@@ -48,7 +48,7 @@ fn main() {
         let id = std::str::from_utf8( 
                 seqrec.id().split(|&x| x == delimiter[0]).collect::<Vec<&[u8]>>()[0]
             ).unwrap().to_string();
-        let seq = seqrec.seq();
+        let seq = seqrec.seq().iter().map(|&x| x.to_ascii_uppercase()).collect::<Vec<u8>>();
         // Scan the sequence for "GC" pairs
         for j in 0..seq.len().saturating_sub(1) {
             if seq[j] == b'G' && seq[j + 1] == b'C' {
@@ -58,9 +58,7 @@ fn main() {
         }
     }
 
-    data.write_bigwig( &opts.outfile );
-
-
+    let _ = data.write_bigwig( &opts.outfile );
 }
 
 fn read_tsv_to_vec<P: AsRef<Path>>(filename: P) -> Result<Vec<(String, usize)>, String> {

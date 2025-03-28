@@ -1,6 +1,6 @@
 use bigtools;
 use bigtools::beddata::BedParserStreamingIterator;
-use std::thread::Builder;
+//use std::thread::Builder;
 use std::collections::HashMap;
 use std::path::Path;
 

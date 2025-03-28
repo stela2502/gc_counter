@@ -33,7 +33,6 @@ struct Opts {
 
 
 fn main() {
-    println!("Hello, world!");
 
     let opts: Opts = Opts::parse();
 

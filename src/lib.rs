@@ -40,14 +40,14 @@ impl BedData {
         let mut search = HashMap::new();
         for  (name, size) in  genome_sizes{
             search.insert( name.clone(),  genome_info.len() );
-            genome_info.push( (name.clone(), *size, offset + (*size as f64 / bin_width as f64 ).ceil() as usize ) );
+            genome_info.push( (name.clone(), *size, offset ) );
             offset += (*size as f64 / bin_width as f64 ).ceil() as usize;
         }
         
         Self{
             genome_info,
             search,
-            coverage_data: vec![0.0; genome_sizes.len()],
+            coverage_data: vec![0.0; offset+1],
             bin_width: bin_width as f64,
             threads: 1,
             nreads:0, 
@@ -55,6 +55,11 @@ impl BedData {
     }
     pub fn add(&mut self, chr:&str, pos:usize, value:f32 ) {
         let id = *self.search.get( chr ).unwrap_or_else( || panic!("chromsome {chr} not found!") );
+        let id2 = self.genome_info[id].2 + (pos as f64 / self.bin_width ) as usize;
+        if id2 >= self.coverage_data.len() {
+            println!( "genome info {:?}", self.genome_info[id] );
+            panic!("For my position {} on chr {} the data array id ({}) is out of bounds!", pos, chr, id2 )
+        }
         self.coverage_data[ self.genome_info[id].2 + (pos as f64 / self.bin_width ) as usize ] += value;
     }
 

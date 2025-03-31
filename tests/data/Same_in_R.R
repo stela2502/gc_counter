@@ -38,7 +38,7 @@ calculate_gc_content_bins <- function(sequence, bin_size) {
         # Count occurrences of "GC" dinucleotide
     gc_count <- gregexpr("GC", subseq, fixed = TRUE)
     gc_matches <- 0
-    gc_matches <- sum(gc_count[[1]] > 0)  # Count valid matches
+    gc_matches <- sum(gc_count[[1]] > 0) / bin_size *100  # Count valid matches in percent
 
     gc_contents <- c(gc_contents, gc_matches)
   }

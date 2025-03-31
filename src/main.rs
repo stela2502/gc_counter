@@ -45,6 +45,7 @@ fn main() {
     let genome_sizes = read_tsv_to_vec( &opts.genome_sizes ).unwrap();
     let mut data = BedData::new( &genome_sizes, opts.bin_width );
     let delimiter = b"|";
+    let factor = opts.bin_width as f32 / 100.0;
 
     while let Some(e_record) = expr_file.next() {
         let seqrec = e_record.expect("invalid record");
@@ -55,7 +56,7 @@ fn main() {
         // Scan the sequence for "GC" pairs
         for j in 0..seq.len().saturating_sub(1) {
             if seq[j] == b'G' && seq[j + 1] == b'C' {
-                data.add( &id, j, 1.0 );
+                data.add( &id, j, 1.0 /  factor );
                 //println!("Found GC at position {} in sequence {}", j, id);
             }
         }

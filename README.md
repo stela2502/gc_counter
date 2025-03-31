@@ -2,7 +2,7 @@
 
 This is an example implementation of a simple bioinformatics workflow:
 
-Count the GC contents of a fasta file and write the results into a bigwig file counting the CG content of the sequence in valiable bin sizes.
+Count the GC contents of a fasta file and write the results into a bigwig file counting the CG content of the sequence in valiable bin sizes. The GC content is measured in percent.
 
 This is a tiny project that should introduce the usage of Rust in Bioinformatics to experienced R and Python programmers.
 

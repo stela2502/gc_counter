@@ -8,7 +8,7 @@ This is a tiny project that should introduce the usage of Rust in Bioinformatics
 
 And this repo is the example implementation, not the tutorial on the basics of Rust progamming...
 
-Took me ~ 2h to implement. And a little more to break the edges.
+Took me ~ 2h to implement. And a little more to smooth the edges.
 
 The comparison to R took me actually longer and I am sure that one is not efficient.
 

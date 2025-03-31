@@ -41,7 +41,7 @@ BigWig file created at: tests/data/out.R.bw
 real    0m8,869s
 user    0m8,259s
 sys 0m0,612s
-...
+```
 
 
 But that was unfair from the start...

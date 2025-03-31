@@ -8,6 +8,7 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 
+use std::time::SystemTime;
 
 
 #[derive(Parser)]
@@ -34,6 +35,8 @@ struct Opts {
 
 fn main() {
 
+    let now = SystemTime::now();
+
     let opts: Opts = Opts::parse();
 
 
@@ -59,6 +62,24 @@ fn main() {
     }
 
     let _ = data.write_bigwig( &opts.outfile );
+
+    match now.elapsed() {
+        Ok(elapsed) => {
+            let mut milli = elapsed.as_millis();
+
+            let mil = milli % 1000;
+            milli= (milli - mil) /1000;
+
+            let sec = milli % 60;
+            milli= (milli -sec) /60;
+
+            let min = milli % 60;
+            milli= (milli -min) /60;
+
+            eprintln!("finished in {milli} h {min} min {sec} sec {mil} milli sec");
+        },
+        Err(e) => {println!("Error: {e:?}");}
+    }
 }
 
 fn read_tsv_to_vec<P: AsRef<Path>>(filename: P) -> Result<Vec<(String, usize)>, String> {

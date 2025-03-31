@@ -8,9 +8,18 @@ fn test_gc_counter_command() {
     let input_fasta = "tests/data/chrM.fa.gz";
     let output_bw = "tests/data/out.bw";
     let genome_sizes = "tests/data/chrm.size.tsv";
-    
+
+    let is_release_mode = !cfg!(debug_assertions);
+
+    // Dynamically set the path to the binary
+    let binary_path = if is_release_mode {
+        "./target/release/gc_counter"
+    } else {
+        "./target/debug/gc_counter"
+    };
+
     // Run the command using std::process::Command
-    let status = Command::new("./target/debug/gc_counter")
+    let status = Command::new(binary_path)
         .arg("-f")
         .arg(input_fasta)
         .arg("-o")
